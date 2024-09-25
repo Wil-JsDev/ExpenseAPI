@@ -25,4 +25,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ExpenseAPI.Application\ExpenseAPI.Application.csproj" />
+    <ProjectReference Include="..\ExpenseAPI.Domain\ExpenseAPI.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
