@@ -98,20 +98,20 @@ namespace ExpenseAPI.Application.Service
 
             if (filtersOptions == FiltersOptions.PastWeek)
             {
-                filter = filter.AddDays(-7);
+                filter.AddDays(-7);
                 var week = await _expenseRepository.FilterAsync(filter);
                 return week.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
             } 
 
             else if (filtersOptions == FiltersOptions.PastWeek)
             {
-                filter = filter.AddMonths(-1);
+                filter.AddMonths(-1);
                 var pastMonth = await _expenseRepository.FilterAsync(filter);
                 return pastMonth.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
             }
             else if (filtersOptions == FiltersOptions.LastThreeMonth)
             {
-                filter = filter.AddMonths(-1);
+                filter.AddMonths(-1);
                 var lastThreeMonth = await _expenseRepository.FilterAsync(filter);
                 return lastThreeMonth.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
             }
