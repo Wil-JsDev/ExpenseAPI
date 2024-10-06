@@ -20,7 +20,8 @@ namespace ExpenseAPI.Infraestructure.Persistence
             #region Connection
             services.AddDbContext<ExpenseContext>(p =>
             {
-                p.UseNpgsql(configuration.GetConnectionString("ExpenseAPI"));
+                p.UseNpgsql(configuration.GetConnectionString("ExpenseAPIDB"),
+                b => b.MigrationsAssembly("ExpenseAPI.Infraestructure.Persistence"));
             });
             #endregion
 
