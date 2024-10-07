@@ -12,13 +12,39 @@ namespace ExpenseAPI.Application.Mapping
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile()
-        {
-            CreateMap<ExpenseDTO,Expense>().ReverseMap();
-            CreateMap<ExpenseCreateUpdateDTO, Expense>().ReverseMap();
+            public MappingProfile()
+            {
+                #region Expense
+                CreateMap<Expense, ExpenseDTO>()
+                    .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ExpenseId))
+                    .ReverseMap();
 
-            CreateMap<CategoryCreateUpdateDTO, Category>().ReverseMap();
-            CreateMap<CategoryDTO, Category>().ReverseMap();
-        }
+                CreateMap<ExpenseDTO, Expense>()
+                    .ForMember(dest => dest.ExpenseId, opt => opt.MapFrom(src => src.ID))
+                    .ReverseMap();
+
+                CreateMap<ExpenseCreateUpdateDTO, Expense>();
+                CreateMap<Expense, ExpenseCreateUpdateDTO>();
+                #endregion
+
+                #region Category
+                CreateMap<Category, CategoryDTO>()
+                    .ForMember(opt => opt.ID, opt => opt.MapFrom(src => src.CategoryId))
+                    .ReverseMap();
+
+                CreateMap<CategoryDTO, Category>()
+                    .ForMember(opt => opt.CategoryId, opt => opt.MapFrom(src => src.ID))
+                    .ReverseMap();
+
+                CreateMap<CategoryCreateUpdateDTO, Category>()
+                    .ForMember(opt => opt.Name, opt => opt.MapFrom(src => src.name))
+                    .ReverseMap();
+
+                CreateMap<Category, CategoryCreateUpdateDTO>()
+                    .ForMember(opt => opt.name, opt => opt.MapFrom(src => src.Name))
+                    .ReverseMap();
+                #endregion
+            } 
     }
 }
+

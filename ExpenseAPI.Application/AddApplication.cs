@@ -20,7 +20,7 @@ namespace ExpenseAPI.Application
 
             #region Services
             services.AddScoped<IExpenseService, ExpenseService>();
-
+            services.AddScoped<ICategoryService, CategoryService>();
             #endregion
         }
     }
