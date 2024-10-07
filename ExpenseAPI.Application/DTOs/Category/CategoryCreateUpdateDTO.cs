@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ExpenseAPI.Application.DTOs.Category
 {
-    public record CategoryCreateUpdateDTO
-    (
-        string name,
-        string Description
-    );
+    public class CategoryCreateUpdateDTO
+    {
+        public string name { get; set; }
+
+        public string Description { get; set; }
+    }
 }
