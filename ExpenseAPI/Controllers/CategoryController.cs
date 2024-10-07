@@ -34,5 +34,13 @@ namespace ExpenseAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = categoryDto.ID }, categoryDto);
         }
 
+        [HttpDelete("{Id:int}")]
+        public async Task<ActionResult<CategoryDTO>> Delete(int Id)
+        {
+            var categoryId = await _categoryService.GetByIdAsync(Id);
+
+            return categoryId == null ? NotFound() : Ok(categoryId);
+        }
+
     }
 }
