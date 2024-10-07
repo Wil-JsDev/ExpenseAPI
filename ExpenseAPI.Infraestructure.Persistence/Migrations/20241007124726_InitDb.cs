@@ -30,7 +30,8 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
                 name: "Expenses",
                 columns: table => new
                 {
-                    ExpenseId = table.Column<int>(type: "integer", nullable: false),
+                    ExpenseId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     ExpenseDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
@@ -42,11 +43,16 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
                     table.PrimaryKey("PK_Expenses", x => x.ExpenseId);
                     table.ForeignKey(
                         name: "Fk_Expense",
-                        column: x => x.ExpenseId,
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Expenses_CategoryId",
+                table: "Expenses",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />

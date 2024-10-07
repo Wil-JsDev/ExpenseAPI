@@ -46,7 +46,10 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
             modelBuilder.Entity("ExpenseAPI.Domain.Entities.Expense", b =>
                 {
                     b.Property<int>("ExpenseId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ExpenseId"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
@@ -66,6 +69,8 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
 
                     b.HasKey("ExpenseId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Expenses", (string)null);
                 });
 
@@ -73,8 +78,8 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
                 {
                     b.HasOne("ExpenseAPI.Domain.Entities.Category", "Category")
                         .WithMany("Expenses")
-                        .HasForeignKey("ExpenseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("Fk_Expense");
 

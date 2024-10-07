@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ExpenseAPI.Infraestructure.Persistence.Migrations
 {
     [DbContext(typeof(ExpenseContext))]
-    [Migration("20241006195930_InitDb")]
+    [Migration("20241007124726_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -49,7 +49,10 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
             modelBuilder.Entity("ExpenseAPI.Domain.Entities.Expense", b =>
                 {
                     b.Property<int>("ExpenseId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ExpenseId"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
@@ -69,6 +72,8 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
 
                     b.HasKey("ExpenseId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Expenses", (string)null);
                 });
 
@@ -76,8 +81,8 @@ namespace ExpenseAPI.Infraestructure.Persistence.Migrations
                 {
                     b.HasOne("ExpenseAPI.Domain.Entities.Category", "Category")
                         .WithMany("Expenses")
-                        .HasForeignKey("ExpenseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("Fk_Expense");
 

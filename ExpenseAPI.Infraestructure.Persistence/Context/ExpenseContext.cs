@@ -32,6 +32,10 @@ namespace ExpenseAPI.Infraestructure.Persistence.Context
                 .HasKey(e => e.CategoryId);
             #endregion
 
+            modelBuilder.Entity<Expense>()
+                  .Property(e => e.ExpenseId)
+                  .ValueGeneratedOnAdd();
+
             #region Tables
             modelBuilder.Entity<Expense>().ToTable("Expenses");
             modelBuilder.Entity<Category>().ToTable("Categories");
@@ -41,7 +45,8 @@ namespace ExpenseAPI.Infraestructure.Persistence.Context
             modelBuilder.Entity<Expense>()
                 .HasOne(e => e.Category)
                 .WithMany(r => r.Expenses)
-                .HasForeignKey(e => e.ExpenseId)
+                .HasForeignKey(e => e.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("Fk_Expense");
 
             #endregion
