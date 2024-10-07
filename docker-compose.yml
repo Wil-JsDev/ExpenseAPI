@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - ${POSTGRES_PORTS}:5432
+    - ${POSTGRES_PORTS}:5432
     volumes:
       - postgresql:/var/lib/postgresql/data
     environment:
@@ -16,3 +16,4 @@ services:
 
 volumes:
   postgresql:
+    external: false
