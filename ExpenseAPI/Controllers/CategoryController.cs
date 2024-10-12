@@ -17,6 +17,11 @@ namespace ExpenseAPI.Controllers
             _categoryService = categoryService;
         }
 
+        [HttpGet("all")]
+        public async Task<IEnumerable<CategoryDTO>> GetAll() =>
+           await _categoryService.GetAllAsync();
+
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CategoryDTO>> GetById(int id)
         {
@@ -26,12 +31,22 @@ namespace ExpenseAPI.Controllers
 
         }
 
-        [HttpPost("Add")]
+        [HttpPost("add")]
         public async Task<ActionResult<CategoryDTO>> AddAsync(CategoryCreateUpdateDTO category)
         {
             var categoryDto = await _categoryService.AddAsync(category);
 
             return CreatedAtAction(nameof(GetById), new { id = categoryDto.ID }, categoryDto);
+        }
+
+        [HttpPut("update/{id:int}")]
+        public async Task<ActionResult<CategoryCreateUpdateDTO>> Update(int id, CategoryCreateUpdateDTO updateDTO )
+        {
+
+            var categoryUpdate = await _categoryService.UpdateAsync(id, updateDTO);
+
+            return categoryUpdate == null ? BadRequest() : NoContent();
+
         }
 
         [HttpDelete("{Id:int}")]

@@ -13,10 +13,12 @@ namespace ExpenseAPI.Application.DTOs.Expense
 
         public decimal Amount { get; set; }
 
-        public DateTime ExpenseDate { get; set; }
+        public DateTime ExpenseDate { get; set; } = DateTime.Now;
 
         public int CategoryId { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime Created_at { get; set; } = DateTime.UtcNow;
     }
 }
