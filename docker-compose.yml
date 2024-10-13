@@ -5,8 +5,6 @@ services:
     image: ${POSTGRES_CONTAINER_IMAGE_NAME}
     env_file:
       - .env
-    ports:
-    - ${POSTGRES_PORTS}:5432
     volumes:
       - postgresql:/var/lib/postgresql/data
     environment:
@@ -14,6 +12,36 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
 
+
+  Pg_Admin:
+    depends_on:
+      - MyDbPostgres
+    container_name: PgAdmin
+    image: dpage/pgadmin4:6.17
+    volumes:
+      - Pg_Admin:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports: 
+      - "${PGADMIN_PORTS}:80"
+
+  Redis:
+    container_name: Redis_Cache
+    image: redis:7.4.1-alpine3.20
+    volumes:
+      - Redis_Cache:/data redis/redis-stack:latest
+    environment:
+      - REDIS_ARGS:${REDIS_ARGS}
+      - REDISEARCH_ARGS:${REDISEARCH_ARGS}
+    ports:
+    - ${REDIS_PORTS}:6579
+
+
 volumes:
   postgresql:
     external: false
+  Pg_Admin:
+    external: false
+  Redis_Cache:
+    
