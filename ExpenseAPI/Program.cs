@@ -1,7 +1,7 @@
 using ExpenseAPI.Infraestructure.Persistence;
 using ExpenseAPI.Application;
-
-
+using Resend;
+using ExpenseAPI.Infraestructure.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -14,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(configuration);
 builder.Services.AddServices();
+builder.Services.AddSharedService();
+builder.Services.AddHttpClient<ResendClient>();
 
 var app = builder.Build();
 

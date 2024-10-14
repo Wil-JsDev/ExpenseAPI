@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseAPI", "ExpenseAPI\ExpenseAPI.csproj", "{00908679-A5C5-4D88-9C5B-45C26F36B566}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseAPI", "ExpenseAPI\ExpenseAPI.csproj", "{00908679-A5C5-4D88-9C5B-45C26F36B566}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C2AB5DC7-C4A8-4EF6-A389-C01EB3F2264D}"
 EndProject
@@ -13,13 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{DEE87F0F-D8D0-4E53-BDCA-8C1408411E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseAPI.Application", "ExpenseAPI.Application\ExpenseAPI.Application.csproj", "{E003B9E6-43F0-43E2-A6DB-8EC879EE3D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseAPI.Application", "ExpenseAPI.Application\ExpenseAPI.Application.csproj", "{E003B9E6-43F0-43E2-A6DB-8EC879EE3D85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseAPI.Domain", "ExpenseAPI.Domain\ExpenseAPI.Domain.csproj", "{E82EA25B-D66B-493A-A024-A722E7A8B954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseAPI.Domain", "ExpenseAPI.Domain\ExpenseAPI.Domain.csproj", "{E82EA25B-D66B-493A-A024-A722E7A8B954}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseAPI.Infraestructure.Persistence", "ExpenseAPI.Infraestructure.Persistence\ExpenseAPI.Infraestructure.Persistence.csproj", "{C93BCF23-97E0-4BE0-8A7D-5D799B64BEF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseAPI.Infraestructure.Persistence", "ExpenseAPI.Infraestructure.Persistence\ExpenseAPI.Infraestructure.Persistence.csproj", "{C93BCF23-97E0-4BE0-8A7D-5D799B64BEF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseAPI.Infraestructure.Identity", "ExpenseAPI.Infraestructure.Identity\ExpenseAPI.Infraestructure.Identity.csproj", "{15B17EA2-EC48-42C7-8C60-D4225086F7C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseAPI.Infraestructure.Identity", "ExpenseAPI.Infraestructure.Identity\ExpenseAPI.Infraestructure.Identity.csproj", "{15B17EA2-EC48-42C7-8C60-D4225086F7C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseAPI.Infraestructure.Shared", "ExpenseAPI.Infraestructure.Shared\ExpenseAPI.Infraestructure.Shared.csproj", "{35F8C4ED-0B71-4116-BA2C-416A6DDB4FE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{15B17EA2-EC48-42C7-8C60-D4225086F7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15B17EA2-EC48-42C7-8C60-D4225086F7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15B17EA2-EC48-42C7-8C60-D4225086F7C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F8C4ED-0B71-4116-BA2C-416A6DDB4FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F8C4ED-0B71-4116-BA2C-416A6DDB4FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F8C4ED-0B71-4116-BA2C-416A6DDB4FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F8C4ED-0B71-4116-BA2C-416A6DDB4FE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{E82EA25B-D66B-493A-A024-A722E7A8B954} = {492406B0-1939-47F3-97B0-A257B3881138}
 		{C93BCF23-97E0-4BE0-8A7D-5D799B64BEF4} = {DEE87F0F-D8D0-4E53-BDCA-8C1408411E4F}
 		{15B17EA2-EC48-42C7-8C60-D4225086F7C4} = {DEE87F0F-D8D0-4E53-BDCA-8C1408411E4F}
+		{35F8C4ED-0B71-4116-BA2C-416A6DDB4FE1} = {DEE87F0F-D8D0-4E53-BDCA-8C1408411E4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58071851-94BF-4248-A083-4FCC0FDC7AED}
