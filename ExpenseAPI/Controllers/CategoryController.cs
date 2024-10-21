@@ -1,6 +1,7 @@
 ﻿using ExpenseAPI.Application.DTOs.Category;
 using ExpenseAPI.Application.DTOs.Expense;
 using ExpenseAPI.Application.Interfaces.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,11 @@ namespace ExpenseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Basic")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-
+       
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
