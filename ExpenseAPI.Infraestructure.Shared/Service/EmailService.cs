@@ -1,7 +1,10 @@
 ﻿using ExpenseAPI.Application.DTOs.Email;
 using ExpenseAPI.Application.Interfaces.Service;
 using ExpenseAPI.Domain.Settings;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
+using MimeKit;
+using Org.BouncyCastle.Asn1.Ocsp;
 using Resend;
 using System;
 using System.Collections.Generic;
@@ -13,24 +16,30 @@ namespace ExpenseAPI.Infraestructure.Shared.Service
 {
     public class EmailService : IEmailService
     {
-        private readonly IResend _resend;
-        private readonly MailSettings _mailSettings;
+        private MailSettings _mailSettings { get; }
 
-        public EmailService(IOptions<MailSettings> options,IResend resend)
+        public EmailService(IOptions<MailSettings> options)
         {
-            _resend = resend;
             _mailSettings = options.Value;
         }
 
-        public async Task Execute(EmailRequestDto emailRequest)
+        public async Task Execute(EmailRequestDto request)
         {
-            var message = new EmailMessage();
-            message.From = _mailSettings.EmailFrom;
-            message.To.Add(emailRequest.To);
-            message.Subject = emailRequest.Subject;
-            message.HtmlBody = emailRequest.Body;
+            MimeMessage email = new();
+            email.Sender = MailboxAddress.Parse(_mailSettings.EmailFrom);
+            email.To.Add(MailboxAddress.Parse(request.To)); //Esto es para a quien le quiero enviar ese correo
+            email.Subject = request.Subject;
+            BodyBuilder builder = new();
+            builder.HtmlBody = request.Body;
+            email.Body = builder.ToMessageBody();
 
-            await _resend.EmailSendAsync(message);
+            //Configuracion del SMTP
+            using MailKit.Net.Smtp.SmtpClient smtp = new();
+            smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
+            smtp.Connect(_mailSettings.SmtpHost, _mailSettings.SmtpPort, SecureSocketOptions.StartTls);
+            smtp.Authenticate(_mailSettings.SmtpUser, _mailSettings.SmtpPass);
+            await smtp.SendAsync(email);
+            smtp.Disconnect(true);
         }
     }
 }
