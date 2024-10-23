@@ -138,59 +138,59 @@ namespace ExpenseAPI.Infraestructure.Identity.Service
             return response;
         }
 
-        //public async Task<RegisterResponse> RegisterAdminUser(RegisterRequest request, string origin)
-        //{
-        //    RegisterResponse response = new RegisterResponse()
-        //    {
-        //        HasError = false
-        //    };
+        public async Task<RegisterResponse> RegisterAdminUser(RegisterRequest request, string origin)
+        {
+            RegisterResponse response = new RegisterResponse()
+            {
+                HasError = false
+            };
 
-        //    var userName = await _userManager.FindByNameAsync(request.Username);
-        //    if (userName != null)
-        //    {
-        //        response.HasError = true;
-        //        response.Error = $"Username '{userName}' already taken";
-        //        return response;
-        //    }
+            var userName = await _userManager.FindByNameAsync(request.Username);
+            if (userName != null)
+            {
+                response.HasError = true;
+                response.Error = $"Username '{userName}' already taken";
+                return response;
+            }
 
-        //    var userWithEmail = await _userManager.FindByEmailAsync(request.Email);
-        //    if (userWithEmail != null)
-        //    {
-        //        response.HasError = true;
-        //        response.Error = $"Email '{request.Email}' already taken";
-        //        return response;
-        //    }
+            var userWithEmail = await _userManager.FindByEmailAsync(request.Email);
+            if (userWithEmail != null)
+            {
+                response.HasError = true;
+                response.Error = $"Email '{request.Email}' already taken";
+                return response;
+            }
 
-        //    User userAdmin = new User
-        //    {
-        //        Email = request.Email,
-        //        UserName = request.Username,
-        //        FirstName = request.FirstName,
-        //        LastName = request.LastName,
-        //        PhoneNumber = request.Phone,
-        //    };
+            User userAdmin = new User
+            {
+                Email = request.Email,
+                UserName = request.Username,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                PhoneNumber = request.Phone,
+            };
 
-        //    var result = await _userManager.CreateAsync(userAdmin, Roles.Admin.ToString());
-        //    if (result.Succeeded)
-        //    {
-        //        await _userManager.AddToRoleAsync(userAdmin, Roles.Admin.ToString());
-        //        var verification = await SendVerificationEmilUrl(userAdmin, origin);
-        //        await _emailService.Execute(new EmailRequestDto()
-        //        {
-        //            To = userAdmin.Email,
-        //            Body = $"<p>Please confirm your account by visiting this URL:</p><p><a href=\"{verification}\">{verification}</a></p>",
-        //            Subject = "Confirm registration"
-        //        });
-        //    }
-        //    else
-        //    {
-        //        response.HasError = true;
-        //        response.Error = "An error ocurred trying to registed the user admin";
-        //        return response;
-        //    }
+            var result = await _userManager.CreateAsync(userAdmin, Roles.Admin.ToString());
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(userAdmin, Roles.Admin.ToString());
+                var verification = await SendVerificationEmilUrl(userAdmin, origin);
+                await _emailService.Execute(new EmailRequestDto()
+                {
+                    To = userAdmin.Email,
+                    Body = $"<p>Please confirm your account by visiting this URL:</p><p><a href=\"{verification}\">{verification}</a></p>",
+                    Subject = "Confirm registration"
+                });
+            }
+            else
+            {
+                response.HasError = true;
+                response.Error = "An error ocurred trying to registed the user admin";
+                return response;
+            }
 
-        //    return response;
-        //}
+            return response;
+        }
 
         public async Task<string> ConfirmAccountAsync(string userId, string token)
         {

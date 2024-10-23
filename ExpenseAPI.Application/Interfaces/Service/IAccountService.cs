@@ -13,7 +13,7 @@ namespace ExpenseAPI.Application.Interfaces.Service
 
        Task<string> ConfirmAccountAsync(string userId, string token);
 
-       //Task<RegisterResponse> RegisterAdminUser(RegisterRequest request, string origin);
+       Task<RegisterResponse> RegisterAdminUser(RegisterRequest request, string origin);
 
        Task<RegisterResponse> RegisterBasicUserAsync(RegisterRequest request, string origin);
 

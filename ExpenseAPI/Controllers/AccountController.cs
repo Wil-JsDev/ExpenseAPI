@@ -33,13 +33,12 @@ namespace ExpenseAPI.Controllers
             return Ok(await _accountService.RegisterBasicUserAsync(request, origin));
         }
 
-        //[HttpPost("register/admin")]
-        //public async Task<IActionResult> RegisterAdminAsync(RegisterRequest request)
-        //{
-        //    var origin = Request.Headers["origin"];
-        //    var register = await _accountService.RegisterAdminUser(request,origin);
-        //    return Ok(register);
-        //}
+        [HttpPost("register/admin")]
+        public async Task<IActionResult> RegisterAdminUserAsync(RegisterRequest request)
+        {
+            var origin = Request.Headers["origin"].ToString();
+            return Ok(await _accountService.RegisterAdminUser(request,origin));
+        }
 
         [HttpGet("confirm-email")]
         public async Task<IActionResult> ConfirmAccount(string userId, string token)
