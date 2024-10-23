@@ -39,7 +39,7 @@ namespace ExpenseAPI.Controllers
             return CreatedAtAction(nameof(GetbyId), new { id = expenseDto.ID }, expenseDto);
         }
 
-        [HttpGet("Filter")]
+        [HttpGet("filter")]
         public async Task<ActionResult<ExpenseDTO>> Filter([FromQuery] FiltersOptions filters)
         {
             var filter =  await _expenseService.FiltersAsync(filters);

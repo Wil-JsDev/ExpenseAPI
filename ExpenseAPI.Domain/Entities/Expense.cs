@@ -13,7 +13,7 @@ namespace ExpenseAPI.Domain.Entities
 
         public decimal Amount { get; set; }
 
-        public DateTime ExpenseDate { get; set; }
+        public DateTime ExpenseDate { get; set; } = DateTime.UtcNow;
 
         // Foreign Key to Category
         public int CategoryId { get; set; }  // Foreign Key

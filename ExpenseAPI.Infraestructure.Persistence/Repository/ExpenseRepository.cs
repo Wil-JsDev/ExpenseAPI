@@ -30,11 +30,10 @@ namespace ExpenseAPI.Infraestructure.Persistence.Repository
 
         public async Task<IEnumerable<Expense>> FilterAsync(DateTime filter)
         {
-            var filterDate = await _expenseContext.Expenses
-                                              .Where(f => f.ExpenseDate == filter)
-                                              .ToListAsync(); 
-            
-            return filterDate;
+            var query = await _expenseContext.Expenses.AsQueryable()
+                                       .Where(e => e.ExpenseDate < filter)
+                                       .ToListAsync();
+            return query;
         }
 
         public async Task<IEnumerable<Expense>> GetAllAsync() =>

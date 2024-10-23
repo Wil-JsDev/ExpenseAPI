@@ -13,7 +13,7 @@ namespace ExpenseAPI.Application.DTOs.Expense
 
         public decimal Amount { get; set; }
 
-        public DateTime ExpenseDate { get; set; } = DateTime.Now;
+        public DateTime ExpenseDate { get; set; } = DateTime.UtcNow;
 
         public int CategoryId { get; set; }
 
