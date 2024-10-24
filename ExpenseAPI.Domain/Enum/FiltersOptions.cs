@@ -8,6 +8,7 @@ namespace ExpenseAPI.Domain.Enum
 {
     public enum FiltersOptions
     {
+        PastDay,
         PastWeek,
         Month,
         LastThreeMonth

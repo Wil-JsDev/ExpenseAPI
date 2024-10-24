@@ -94,28 +94,34 @@ namespace ExpenseAPI.Application.Service
 
         public async Task<IEnumerable<ExpenseDTO>> FiltersAsync(FiltersOptions filtersOptions)
         {
-            var filter = DateTime.UtcNow;
+            DateTime filter = DateTime.UtcNow;
 
             if (filtersOptions == FiltersOptions.PastWeek)
             {
-                filter.AddDays(-7);
+               filter = filter.AddDays(-7);
                 var week = await _expenseRepository.FilterAsync(filter);
                 return week.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
             } 
 
-            else if (filtersOptions == FiltersOptions.PastWeek)
+            else if (filtersOptions == FiltersOptions.Month)
             {
-                filter.AddMonths(-1);
+                filter = filter.AddMonths(-1);
                 var pastMonth = await _expenseRepository.FilterAsync(filter);
                 return pastMonth.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
             }
             else if (filtersOptions == FiltersOptions.LastThreeMonth)
             {
-                filter.AddMonths(-1);
+                filter = filter.AddMonths(-3);
                 var lastThreeMonth = await _expenseRepository.FilterAsync(filter);
                 return lastThreeMonth.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
             }
-            
+            else if (filtersOptions == FiltersOptions.PastDay)
+            {
+                filter = filter.AddDays(-1);
+                var pastDay = await _expenseRepository.FilterAsync(filter);
+                return pastDay.Select(b => _mapper.Map<ExpenseDTO>(b)).ToList();
+            }
+
             return null;
         }        
     }
